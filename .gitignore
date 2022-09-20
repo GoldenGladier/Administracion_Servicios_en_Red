@@ -1,0 +1,5 @@
+# Ignora archivos de Practica 01 de ESME
+.\P01-Esme
+
+# Ignora la carpeta de cache de Python
+.\__pycache__
