@@ -51,7 +51,7 @@ def readAgents():
 while(True):
     print("Sistema de Administración de Red")
     print("Práctica 01 - Adquisición de información")
-    print("Omar Aguirre Alvarez - GRUPO - 2020630593")
+    print("Omar Aguirre Alvarez - 4CM13 - 2020630593")
 
     print("Elige una opción: \n 1) Agregar dispositivo. \n 2) Cambiar información del dispositivo. \n 3) Eliminar dispositivo. \n 4) Ver dispositivos. \n 5) Reporte de un dispositivo. \n 6) Salir. \nOpción: ")
 

@@ -12,7 +12,7 @@ def makeReport(agent : Agent, id):
         text.textLine("Adeministración de Servicios en Red")
         text.textLine("Sistema de Administración de Red")
         text.textLine("Práctica 01 - Adquisición de información")
-        text.textLine("Omar Aguirre Alvarez - GRUPO - 2020630593")
+        text.textLine("Omar Aguirre Alvarez - 4CM13 - 2020630593")
         # information agent
         text.textLine("") 
         text.setFont("Times-Roman", 15)       
