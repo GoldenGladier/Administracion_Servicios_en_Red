@@ -1,0 +1,19 @@
+
+---- Device ----
+Comunidad: OmarAA
+SNMP version: 1
+Puerto: 1
+IP: 192.168.56.1
+----------------
+---- Device ----
+Comunidad: OmarAA
+SNMP version: 1
+Puerto: 1
+IP: 192.168.56.1
+----------------
+---- Device ----
+Comunidad: EsmeraldaZP
+SNMP version: 1
+Puerto: 1
+IP: 192.168.243.230
+----------------

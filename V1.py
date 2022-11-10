@@ -13,7 +13,7 @@ from pysnmp.hlapi import *
 
 errorIndication, errorStatus, errorIndex, varBinds = next(
     getCmd(SnmpEngine(),
-           CommunityData('ComudadASRWin', mpModel=0),
+           CommunityData('EsmeraldaZP', mpModel=0),
            UdpTransportTarget(('8.40.1.13', 161)),
            ContextData(),
            ObjectType(ObjectIdentity('1.3.6.1.2.1.1.6.0')))

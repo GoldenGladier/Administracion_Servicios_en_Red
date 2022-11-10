@@ -1,0 +1,10 @@
+CREO QUE ES ASÍ:
+
+Create -----> Si se ejecuta más de una vez borra los datos recopilados en la primera vez
+Update
+Graph
+
+
+NOTA:
+---> Omar (número de días módulo 3) + 1 = 2
+---> Esme es = 1
