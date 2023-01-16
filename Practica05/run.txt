@@ -1,0 +1,65 @@
+GNS3
+	en
+	conf
+	interface ethernet eth0
+	ip address 192.168.1.1/24
+	no sh
+	exit 
+	ping 192.168.1.2
+	
+	snmp-server community public ro
+	snmp-server host 192.168.1.2 traps version 2c comunidadTRAPS
+	snmp-server enable traps
+
+	interface ethernet eth1
+	ip address 10.10.10.1/24
+	no sh
+
+1) Configurar un gestor SNMP que recibe mensajes TRAPS.
+
+	sudo nano /etc/snmp/snmptrapd.conf
+	sudo snmptrapd -f -Lo -c /etc/snmp/snmptrapd.conf
+
+2) Crear un nodo enterprise de la MIB TRAP-TEST-MIB que se llama demotraps.
+
+	sudo nano /usr/share/snmp/mibs/TRAP-TEST-MIB.txt
+
+3) Generar por consola cinco mensajes TRAPS; cuatro de tipo genérico y uno de tipo
+enterprise.
+
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 0 0 '55' 1.11.12.13.14.15 s "teststring"
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 4 0 '55' 1.11.12.13.14.15 s "teststring"
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 2 0 '55' 1.11.12.13.14.15 s "teststring"
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 3 0 '55' 1.11.12.13.14.15 s "teststring"
+
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 6 17 '55' 1.11.12.13.14.15 s "teststring"
+	-- snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 5 0 '55' 1.11.12.13.14.15 s "teststring"
+
+4) Generar mensajes de tipo TRAPS de tipo LinkDown, LinkUp y coldStart desde un
+enrutador RCP100 usando GNS3.
+
+	LinkDown --> Desconectar cable
+	LinkUp --> Conectar cable
+	coldStart --> ???
+
+5) Usar la directiva traphandle para invocar un script al momento de recibir una TRAP.
+Generar traphandle para traps genéricas (LinkDown, LinkUp, coldStart, etc.) y para
+traps enterprice (demotrap). Se deben generar cinco traphandle para recibir cinco
+tipos de traps diferentes (cuatro genéricas y una enterprice) y ejecutar el script
+correspondiente
+
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 0 0 '55' 1.11.12.13.14.15 s "teststring"
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 2 0 '55' 1.11.12.13.14.15 s "teststring"
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 3 0 '55' 1.11.12.13.14.15 s "teststring"
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 4 0 '55' 1.11.12.13.14.15 s "teststring"
+
+	snmptrap -v 1 -c comunidadTRAPS localhost '1.2.3.4.5.6' '192.193.194.195' 5 0 '55' 1.11.12.13.14.15 s "teststring"
+
+6) En el caso de linkDown, se debe mandar un correo electrónico a
+tanibet.escom@gmail.com indicando que se recibió un mensaje de tipo ALERTA
+indicando, hostname, IP, Fecha, la interfaz que se desconectó y Variables y OID
+recibidas.
+
+7) Para demostrar el funcionamiento,se debe simular un escenario donde se
+desconecta un cable en una interfaz del enrutador, esto genera una alerta de tipo
+LinkDown. El gestor debe detectar y notificar vía email. Generar video.
